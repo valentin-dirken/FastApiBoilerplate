@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from mesfonctions import gestiondb
+from functions import gestiondb
 from starlette.requests import Request
 
 app = FastAPI()
@@ -22,7 +22,7 @@ async def read_albums_router():
 @app.post("/albums")
 async def create_albums_router(payload: Request):
     # The payload contains data to be inserted in the table.
-    results = await gestiondb.create_albums(payload)
+    results = await gestiondb.create_album(payload)
     return results
 
 

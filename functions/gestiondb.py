@@ -18,6 +18,17 @@ async def read_albums():
     return await db.sql_read_query(query)
 
 
+async def read_one_album(id):
+    # payload is not needed, because we take all records
+    query = """
+            Select * from albums 
+            INNER JOIN artists on artists.ArtistId = albums.Artistid
+            WHERE AlbumId =
+            """ + str(id)
+
+    return await db.sql_read_query(query)
+
+
 async def create_album(payload):
     # We need a payload
     # to test : {"Title": "hello", "ArtistId": 2}
@@ -31,16 +42,6 @@ async def create_album(payload):
     return await db.sql_write_query(query, values_in_json_format)
 
 
-async def read_one_album(id):
-    # payload is not needed, because we take all records
-    query = """
-            Select * from albums 
-            INNER JOIN artists on artists.ArtistId = albums.Artistid
-            WHERE AlbumId =
-            """ + str(id)
-
-    return await db.sql_read_query(query)
-
 # ------ CRUD Artists ------
 async def read_artists():
     # payload is not needed, because we take all records
@@ -53,6 +54,7 @@ async def read_one_artist(id):
     query = "Select * from artists WHERE ArtistId=" + str(id)
 
     return await db.sql_read_query(query)
+
 
 async def create_artist(payload):
     # We need a payload

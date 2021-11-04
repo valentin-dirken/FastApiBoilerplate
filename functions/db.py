@@ -8,10 +8,11 @@ from fastapi import FastAPI, HTTPException
 
 database = Database("sqlite:///chinook.db")
 
+
 # FetchAll / FetchOne - Get
 async def sql_read_query(query):
     try:
-        database.connect()
+        await database.connect()
         results = await database.fetch_all(query=query)
         if not results:
             return HTTPException(
@@ -29,13 +30,13 @@ async def sql_read_query(query):
             status_code=404,
             detail=str(e)
         )
-    database.disconnect()
+    await database.disconnect()
 
 
 # POST - DELETE
 async def sql_write_query(query, values_in_json_format):
     try:
-        database.connect()
+        await database.connect()
         await database.execute(
             query=query,
             values=values_in_json_format
@@ -52,4 +53,4 @@ async def sql_write_query(query, values_in_json_format):
             status_code=404,
             detail=str(e)
         )
-    database.disconnect()
+    await database.disconnect()

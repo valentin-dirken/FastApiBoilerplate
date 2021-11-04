@@ -56,13 +56,11 @@ async def create_artists_router(payload: Request):
     return results
 
 
-
-
-
 # TODO  $ pip install -r requirements.txt
 #uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+    uvicorn.run(app, host='0.0.0.0', port=8000)
+    # uvicorn main:app --port 8000 --reload
     # open your web browser and : localhost:8080

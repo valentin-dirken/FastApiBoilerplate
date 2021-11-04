@@ -18,11 +18,32 @@ async def read_albums_router():
     return results
 
 
+# GET (fetchOne) - artists
+@app.get("/albums/{id}")
+async def read_one_album_router(id: int):
+    results = await gestiondb.read_one_album(id)
+    return results
+
+
 # POST - ALBUMS
 @app.post("/albums")
 async def create_albums_router(payload: Request):
     # The payload contains data to be inserted in the table.
     results = await gestiondb.create_album(payload)
+    return results
+
+
+# GET - artists
+@app.get("/artists")
+async def read_artists_router():
+    results = await gestiondb.read_artists()
+    return results
+
+
+# GET (fetchOne) - artists
+@app.get("/artists/{id}")
+async def read_one_artist_router(id: int):
+    results = await gestiondb.read_one_artist(id)
     return results
 
 
@@ -34,11 +55,7 @@ async def create_artists_router(payload: Request):
     return results
 
 
-# GET - artists
-@app.get("/artists")
-async def read_artists_router():
-    results = await gestiondb.read_artists()
-    return results
+
 
 
 # TODO  $ pip install -r requirements.txt

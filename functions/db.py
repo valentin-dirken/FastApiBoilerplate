@@ -8,15 +8,21 @@ from fastapi import FastAPI, HTTPException
 
 database = Database("sqlite:///chinook.db")
 
-
+# FetchAll / FetchOne - Get
 async def sql_read_query(query):
     try:
         database.connect()
         results = await database.fetch_all(query=query)
-        return HTTPException(
-            status_code=200,
-            detail=results
-        )
+        if not results:
+            return HTTPException(
+                status_code=404,
+                detail="Record(s) not found"
+            )
+        else:
+            return HTTPException(
+                status_code=200,
+                detail=results
+            )
     # if we have a problem in the database.fetchall(), a 404 Error will be raised
     except Exception as e:
         return HTTPException(
@@ -26,6 +32,7 @@ async def sql_read_query(query):
     database.disconnect()
 
 
+# POST - DELETE
 async def sql_write_query(query, values_in_json_format):
     try:
         database.connect()

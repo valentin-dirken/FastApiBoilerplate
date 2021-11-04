@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 from functions import gestiondb
 from starlette.requests import Request
@@ -59,9 +60,9 @@ async def create_artists_router(payload: Request):
 
 
 # TODO  $ pip install -r requirements.txt
-
-# TODO OK ! create a record with the POST & Body.
-# TODO read an element
-# TODO OK !  test si bien enregistré dans la DB ...
-# TODO Database import correctement
 #uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=8080)
+    # open your web browser and : localhost:8080

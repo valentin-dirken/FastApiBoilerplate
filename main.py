@@ -1,18 +1,8 @@
-# Start - Don't touch
 from fastapi import FastAPI
 from mesfonctions import gestiondb
 from starlette.requests import Request
-from mesfonctions import db
-database = db.db_connect()
-app = FastAPI()
-@app.on_event("startup")
-async def database_connect():
-    await database.connect()
-@app.on_event("shutdown")
-async def database_disconnect():
-    await database.disconnect()
 
-# End - Don't touch
+app = FastAPI()
 
 
 # Router
